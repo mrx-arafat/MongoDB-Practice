@@ -5,20 +5,19 @@ const app = express();
 
 const port = process.env.PORT || 4000;
 
-const uri =
-  "mongodb+srv://mydbuser1:VWOFQjGXhRqWfoDI@cluster0.8bgmy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://geniusDB:hbu6TAqImuesbrPH@cluster0.8bgmy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+console.log(uri);
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+
+//async await fn
 
 app.get("/", (req, res) => {
-  res.send("dhur node er mai re chudi. valoi pera diteche still ");
+  res.send("dhur node valoi pera diteche still ");
 });
 
 app.listen(port, () => {

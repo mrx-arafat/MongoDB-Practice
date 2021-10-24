@@ -23,8 +23,8 @@ async function run() {
     const haiku = database.collection("haiku");
     // create a document to insert
     const doc = {
-      title: "Record of a Shriveled Datum",
-      content: "No bytes, no problem. Just insert a document, in MongoDB",
+      name: "Easin Arafat",
+      email: "e4rafat@gmail.com",
     };
     const result = await haiku.insertOne(doc);
     console.log(`A document was inserted with the _id: ${result.insertedId}`);
@@ -52,7 +52,7 @@ run().catch(console.dir);
 //   // client.close();
 // });
 
-app.get("/", (req, res) => {
+app.get("/users", (req, res) => {
   res.send("yo yo honey");
 });
 

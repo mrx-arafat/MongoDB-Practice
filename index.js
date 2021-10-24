@@ -16,23 +16,41 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-client.connect((err) => {
-  const collection = client.db("Nayika").collection("devices");
-  // perform actions on the collection object
-  console.log("hitting the db");
+async function run() {
+  try {
+    await client.connect();
+    const database = client.db("insertDB");
+    const haiku = database.collection("haiku");
+    // create a document to insert
+    const doc = {
+      title: "Record of a Shriveled Datum",
+      content: "No bytes, no problem. Just insert a document, in MongoDB",
+    };
+    const result = await haiku.insertOne(doc);
+    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
-  const user = {
-    name: "nurul hasan",
-    email: "yoyonurul@gmail.com",
-    phone: 01356654653,
-  };
+// client.connect((err) => {
+//   const collection = client.db("Nayika").collection("devices");
+//   // perform actions on the collection object
+//   console.log("hitting the db");
 
-  collection.insertOne(user).then(() => {
-    console.log("insert success");
-  });
+//   const user = {
+//     name: "nurul hasan",
+//     email: "yoyonurul@gmail.com",
+//     phone: 01356654653,
+//   };
 
-  // client.close();
-});
+//   collection.insertOne(user).then(() => {
+//     console.log("insert success");
+//   });
+
+//   // client.close();
+// });
 
 app.get("/", (req, res) => {
   res.send("yo yo honey");
